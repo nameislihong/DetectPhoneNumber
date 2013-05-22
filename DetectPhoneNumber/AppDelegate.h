@@ -7,13 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Reachability.h"
 
 @class ViewController;
+
+#define REACH ((AppDelegate *)[UIApplication sharedApplication].delegate).reach
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
 @property (strong, nonatomic) ViewController *viewController;
+@property (strong, nonatomic) Reachability *reach;
 
 @end

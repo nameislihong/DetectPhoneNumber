@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 #import "AppDelegate.h"
+#import "Creator.h"
+#import "People.h"
 
 int main(int argc, char *argv[])
 {

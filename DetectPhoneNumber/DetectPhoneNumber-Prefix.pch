@@ -11,4 +11,12 @@
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
+
+    #define LH_NAVIGATION_BAR_HEIGHT        (44)
+    #define LH_TOOL_BAR_HEIGHT              (44)
+    #define LH_TAB_BAR_HEIGHT               (49)
+    #define LH_STATUS_BAR_HEIGHT            (20)
+    #define LH_SCREEN_WIDTH                 (320)
+    #define LH_SCREEN_HEIGHT                ([[UIScreen mainScreen] bounds].size.height)
+
 #endif

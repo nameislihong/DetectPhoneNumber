@@ -7,19 +7,51 @@
 //
 
 #import "AppDelegate.h"
-
 #import "ViewController.h"
+#import "MobClick.h"
+
+#define UM_APP_KEY @"5176148256240bb565000d32"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [MobClick startWithAppkey:UM_APP_KEY];
+    [MobClick checkUpdate];
+    [self setUIAppearance];
+    [self checkNetworkReachability];
+
+    application.statusBarHidden = NO;
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.viewController = [[ViewController alloc] initWithNibName:@"ViewController" bundle:nil];
-    self.window.rootViewController = self.viewController;
+    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:self.viewController];
     [self.window makeKeyAndVisible];
+    
     return YES;
+}
+
+- (void)setUIAppearance
+{
+    UIImage *image = [[UIImage imageNamed:@"nav_bar"] resizableImageWithCapInsets:UIEdgeInsetsMake(5, 5, 5, 5)];
+    [[UINavigationBar appearance] setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
+    
+    UIImage *backBarImageNormal, *backBarImageSelected;
+    backBarImageNormal = [UIImage imageNamed:@"navbtn_back_normal"];
+    backBarImageSelected = [UIImage imageNamed:@"navbtn_back_select"];
+    [[UIBarButtonItem appearance] setBackButtonBackgroundImage:backBarImageNormal
+                                                      forState:UIControlStateNormal
+                                                    barMetrics:UIBarMetricsDefault];
+    [[UIBarButtonItem appearance] setBackButtonBackgroundImage:backBarImageSelected
+                                                      forState:UIControlStateHighlighted
+                                                    barMetrics:UIBarMetricsDefault];
+}
+
+- (void)checkNetworkReachability
+{
+    self.reach = [Reachability reachabilityWithHostname: @"www.baidu.com"];
+    self.reach.unreachableBlock = ^(Reachability *reach){};
+    [self.reach startNotifier];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
